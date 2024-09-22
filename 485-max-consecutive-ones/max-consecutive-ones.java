@@ -5,15 +5,11 @@ class Solution {
             if(n == 1){
                 count++;
             }else{
-                if(count > max){
-                    max = count;
-                }
+               max  = Math.max(count,max);
                 count  = 0;
             }
         }
-        if(count > max){
-            max = count;
-        }
+        max = Math.max(count,max);
 
         return max;
     }
