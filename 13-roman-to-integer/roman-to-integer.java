@@ -1,6 +1,6 @@
 class Solution {
     public int romanToInt(String s) {
-        Map<Character,Integer> map = new HashMap<>();
+        HashMap<Character,Integer> map = new HashMap<>();
         map.put('I',1);
         map.put('V',5);
         map.put('X',10);
@@ -8,32 +8,18 @@ class Solution {
         map.put('C',100);
         map.put('D',500);
         map.put('M',1000);
-        int number  = 0;
-        int len = s.length();
-
-        if(len  == 1){
-            return map.get(s.charAt(0));
+        int n = s.length();
+        if(n == 1) return map.get(s.charAt(0));
+        int sum = 0;
+        for(int i=0;i<n;i++){
+            char c = s.charAt(i);
+            if(i+1 < n && map.get(c) < map.get(s.charAt(i+1))){
+                sum+=map.get(s.charAt(i+1)) - map.get(c);
+                i++;
+            }else sum+=map.get(c);
         }
 
-        if(len  == 2){
-            if(map.get(s.charAt(0))<map.get(s.charAt(1))){
-                number+=(map.get(s.charAt(1)) - map.get(s.charAt(0)));
-                return number; 
-            }
-        }
+        return sum;
 
-        for(int i=len-1;i>=1;i--){
-            char ch  = s.charAt(i);
-            char chNext = s.charAt(i-1);
-            if(map.get(chNext) < map.get(ch)){
-                number+=(map.get(ch)-map.get(chNext));
-                i--;
-            }else{
-                number+=(map.get(ch));
-            }
-        }
-        if(map.get(s.charAt(0)) >= map.get(s.charAt(1))) number+=map.get(s.charAt(0));
-
-        return number;
     }
 }
