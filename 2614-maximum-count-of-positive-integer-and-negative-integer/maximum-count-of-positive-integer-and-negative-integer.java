@@ -10,6 +10,7 @@ class Solution {
         int ind  = n;
         int low = 0, high = n-1;
         if(choice){
+            //LOWER BOUND: TO FIND THE LAST NEGATIVE NUMBER
             while(low <= high){
                 int mid = low + (high -low)/2;
                 if(arr[mid] >= 0){
@@ -18,6 +19,7 @@ class Solution {
                 }else low = mid +1;
             }
         }else{
+            //UPPER BOUND: TO FIND THE FIRST POSTIVE NUMBER
                 while(low <= high){
                 int mid = low + (high -low)/2;
                 if(arr[mid] > 0){
