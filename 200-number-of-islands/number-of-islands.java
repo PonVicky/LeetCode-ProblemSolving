@@ -1,27 +1,27 @@
 class Solution {
     public int numIslands(char[][] grid) {
-        //USING BERTH-FIRST SEARCH
-        int islandCount  = 0;
-        for(int i=0;i<grid.length;i++){
-            for(int j=0;j<grid[i].length;j++){
+        int numberOfIslands = 0;
+        int n  = grid.length;
+        int m = grid[0].length;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
                 if(grid[i][j] == '1'){
-                    islandCount++;
-                    startBFS(grid,i,j);
+                    searchIslands(i,j,grid,n,m);
+                    numberOfIslands++;
                 }
             }
         }
-        return islandCount;
+        return numberOfIslands;
     }
-
-    private static void startBFS(char[][] grid,int i, int j){
-            if(i < 0 || i >= grid.length || j < 0 || j >=grid[0].length
-                || grid[i][j] == '0') return;
-
-            grid[i][j] = '0';
-            startBFS(grid,i,j+1);//right
-            startBFS(grid,i,j-1);//left
-            startBFS(grid,i+1,j);//top
-            startBFS(grid,i-1,j);//bottom
-
+    public static void searchIslands(int row, int col, char[][] arr,int n, int m){
+        if(row < 0 || row >=n || col < 0 || col >= m||
+            arr[row][col] != '1'){
+                return;
+        }
+        arr[row][col] = '0';
+        searchIslands(row+1,col,arr,n,m);
+        searchIslands(row-1,col,arr,n,m);
+        searchIslands(row,col+1,arr,n,m);
+        searchIslands(row,col-1,arr,n,m);
     }
 }
