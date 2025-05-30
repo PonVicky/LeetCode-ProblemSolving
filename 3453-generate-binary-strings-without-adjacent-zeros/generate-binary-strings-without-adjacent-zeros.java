@@ -9,9 +9,8 @@ class Solution {
             list.add(str);
             return;
         }
-        if(str.length() == 0)
-        generateBinaryStrings(n,str+"0",list);
-        else if (str.charAt(str.length()-1) != '0')
+        int len = str.length();
+        if (len == 0 || str.charAt(len-1) != '0')
         generateBinaryStrings(n,str+"0",list);
         generateBinaryStrings(n,str+"1",list);
     }
