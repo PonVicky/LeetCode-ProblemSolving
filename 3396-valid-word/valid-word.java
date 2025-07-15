@@ -1,37 +1,26 @@
 class Solution {
     public boolean isValid(String word) {
-        int n = word.length();
-        if(n < 3) return false;
-        if(!checkAll(word)) return false;
-        if(!checkCons(word)) return false;
-        if(!checkVowel(word)) return false;
-        return true;
-    }
- public static boolean checkAll(String str){
-        for(char ch:str.toCharArray()){
-            if(!(Character.isDigit(ch) || Character.isAlphabetic(ch))){
-                return false;
-            }
+        if(word.length()  < 3) return false;
+        boolean hasVow = false;
+        boolean hasCon = false;
+        for(int i=0;i<word.length();i++){
+            switch(word.charAt(i)){
+                case 'a','e','i','o','u','A','E','I','O','U': 
+                    hasVow = true;
+                    break;
+                case 'b','c','d','f','g','h','j','k','l','m','n'
+                ,'p','q','r','s','t','v','w','x','y','z','B','C'
+                ,'D','F','G','H','J','K','L','M','N','P','Q'
+                ,'R','S','T','V','W','X','Y','Z':
+                        hasCon = true;
+                        break;
+                 case '0','1','2','3','4','5','6','7','8','9':
+                 break;
+                 default:
+                 return false;  
+            } 
         }
-        return true;
-    }
-    public static boolean checkVowel(String str){
-        for(char ch : str.toCharArray()){
-            if(ch == 'a' || ch=='A' ||
-            ch=='e' || ch =='E' || ch == 'I' || ch =='i'
-            ||ch =='o' ||ch =='O' || ch=='u' ||ch =='U'){
-                return true;
-            }
-        }
-        return false;
-    }
-    public static boolean checkCons(String str){
-        for(char ch  : str.toCharArray()){
-            if((ch != 'A' && ch !='E' && ch!='I' && ch!='O' && ch!='U'&&
-                    ch != 'a' && ch!='e' && ch !='i' && ch!='o' && ch!='u' && !Character.isDigit(ch))){
-                return true;
-            }
-        }
-        return false;
+
+        return hasVow && hasCon;
     }
 }
